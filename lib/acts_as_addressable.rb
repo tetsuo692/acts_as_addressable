@@ -1,6 +1,6 @@
 module ActsAsAddressable
   module ClassMethods
-    def acts_as_addressable
+    def acts_as_addressable(options = {})
       send :include, InstanceMethods
     end
   end
