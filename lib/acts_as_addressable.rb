@@ -1,19 +1,10 @@
-module ActsAsAddressable
-  module ClassMethods
-    def acts_as_addressable(options = {})
-      options = {:sort_column => :title}.merge(options)
-      
-      has_one :addressable_item, :class_name => "AddressableItem", :as => :addressable
-      
-      send :include, InstanceMethods
-    end
-  end
-  
-  module InstanceMethods
-    
-  end
-  
-  def self.included(receiver)
-    receiver.extend         ClassMethods
-  end
+require "acts_as_addressable/acts_as_addressable"
+
+%w{ models }.each do |dir|
+  path = File.join(File.dirname(__FILE__), 'app', dir)
+  $LOAD_PATH << path
+  ActiveSupport::Dependencies.load_paths << path
+  ActiveSupport::Dependencies.load_once_paths.delete(path)
 end
+
+ActiveRecord::Base.send :include, ActsAsAddressable
