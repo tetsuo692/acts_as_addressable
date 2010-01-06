@@ -4,7 +4,7 @@ module ActsAsAddressable
       options = {:sort_column => :title}.merge(options)
       
       has_one :addressable_item, :class_name => "AddressableItem", :as => :addressable
-      
+      before_create :create_addressable_item
       create_reflections
       
       send :include, InstanceMethods
@@ -23,7 +23,9 @@ module ActsAsAddressable
   end
   
   module InstanceMethods
-    
+    def create_addressable_item
+      self.build_addressable_item
+    end
   end
   
   def self.included(receiver)
