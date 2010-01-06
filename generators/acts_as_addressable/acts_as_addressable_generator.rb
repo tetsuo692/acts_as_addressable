@@ -3,6 +3,7 @@ class ActsAsAddressableGenerator < Rails::Generator::NamedBase
     record do |m|
       # m.directory "lib"
       # m.template 'README', "README"
+      
     end
   end
 end
